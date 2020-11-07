@@ -1,0 +1,7 @@
+S->XY
+S->Xn
+S->p
+X->mX
+X->m
+Y->Xn
+Y->o

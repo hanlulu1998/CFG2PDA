@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>743</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_3">
+    <item row="0" column="0">
+     <widget class="QWidget" name="widget" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>72</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>文法输入框</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>71</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QPushButton" name="translateButton">
+      <property name="text">
+       <string>文法转换</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QWidget" name="widget_2" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <spacer name="horizontalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>49</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>结果展示框</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>49</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="3">
+     <widget class="QWidget" name="widget_3" native="true">
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QSplitter" name="splitter">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <widget class="QPlainTextEdit" name="GrammerTextEdit">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+         <widget class="QScrollArea" name="scrollArea">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>390</width>
+             <height>597</height>
+            </rect>
+           </property>
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="0" column="0">
+             <widget class="QTextBrowser" name="displaytext">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>文件</string>
+    </property>
+    <addaction name="actionopen"/>
+    <addaction name="actionsave"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>查看</string>
+    </property>
+    <widget class="QMenu" name="menuGNF">
+     <property name="title">
+      <string>转成GNF</string>
+     </property>
+     <addaction name="actionG1"/>
+     <addaction name="actionG2"/>
+     <addaction name="actionG3"/>
+    </widget>
+    <widget class="QMenu" name="menuSIMPLE">
+     <property name="title">
+      <string>化简CFG</string>
+     </property>
+     <addaction name="actionepsilon"/>
+     <addaction name="actionunit"/>
+     <addaction name="actionuse"/>
+    </widget>
+    <addaction name="menuSIMPLE"/>
+    <addaction name="menuGNF"/>
+    <addaction name="actionpda"/>
+   </widget>
+   <widget class="QMenu" name="menu_3">
+    <property name="title">
+     <string>判断</string>
+    </property>
+    <addaction name="actioninput"/>
+   </widget>
+   <widget class="QMenu" name="menu_4">
+    <property name="title">
+     <string>关于</string>
+    </property>
+    <addaction name="actionMsg"/>
+    <addaction name="actionqt"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
+   <addaction name="menu_3"/>
+   <addaction name="menu_4"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="action">
+   <property name="text">
+    <string>判断任意串</string>
+   </property>
+  </action>
+  <action name="actionNoepsilon">
+   <property name="text">
+    <string>消除epsilon产生式</string>
+   </property>
+  </action>
+  <action name="actionNounit">
+   <property name="text">
+    <string>消除单一产生式</string>
+   </property>
+  </action>
+  <action name="actionNouse">
+   <property name="text">
+    <string>消除无用产生式</string>
+   </property>
+  </action>
+  <action name="actiontoG1">
+   <property name="text">
+    <string>转换G1文法</string>
+   </property>
+   <property name="iconText">
+    <string>转换G1文法</string>
+   </property>
+  </action>
+  <action name="actiontoG2">
+   <property name="text">
+    <string>转换G2文法</string>
+   </property>
+  </action>
+  <action name="actiontoG3">
+   <property name="text">
+    <string>转换G3文法</string>
+   </property>
+  </action>
+  <action name="action_PDA">
+   <property name="text">
+    <string>转换PDA</string>
+   </property>
+  </action>
+  <action name="actionopen">
+   <property name="text">
+    <string>打开文件</string>
+   </property>
+  </action>
+  <action name="actionsave">
+   <property name="text">
+    <string>保存文件</string>
+   </property>
+  </action>
+  <action name="actionepsilon">
+   <property name="text">
+    <string>消除epsilon产生式</string>
+   </property>
+  </action>
+  <action name="actionunit">
+   <property name="text">
+    <string>消除单一产生式</string>
+   </property>
+  </action>
+  <action name="actionuse">
+   <property name="text">
+    <string>消除无用产生式</string>
+   </property>
+  </action>
+  <action name="actionG1">
+   <property name="text">
+    <string>转成G1文法</string>
+   </property>
+  </action>
+  <action name="actionG2">
+   <property name="text">
+    <string>转成G2文法</string>
+   </property>
+  </action>
+  <action name="actionG3">
+   <property name="text">
+    <string>转成G3文法</string>
+   </property>
+  </action>
+  <action name="actionpda">
+   <property name="text">
+    <string>转成PDA</string>
+   </property>
+  </action>
+  <action name="actioninput">
+   <property name="text">
+    <string>输入任意串</string>
+   </property>
+  </action>
+  <action name="actionmsg">
+   <property name="text">
+    <string>msg</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::WidgetWithChildrenShortcut</enum>
+   </property>
+  </action>
+  <action name="actionMsg">
+   <property name="text">
+    <string>软件信息</string>
+   </property>
+  </action>
+  <action name="actionqt">
+   <property name="text">
+    <string>关于Qt</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
