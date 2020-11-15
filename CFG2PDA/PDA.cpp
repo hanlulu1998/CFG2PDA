@@ -1,15 +1,15 @@
-#include"GrammerAnalyzer.h"
-void PDA::generateRule(QVector<GNFProduction> g3)
+#include"Grammar.hpp"
+void PDA::generateRule()
 {
    for(auto i:g3)
    {   QVector<QString>temp;
+       QVector<QString>epsilon;
+       epsilon.append("#");
        current_input s(i.right[0],i.left);
-       //s.stack_ch=i.left;
-      // s.input_ch=i.right[0];
        if(i.right.length()==1)
        {
            temp.clear();
-           rule[s].insert(temp);
+           rule[s].insert(epsilon);
        }
        else
         {
@@ -23,7 +23,7 @@ void PDA::initialPDA(QSet<QString> t_set, QVector<GNFProduction> g3)
 {
     this->t_set=t_set;
     this->g3=g3;
-    generateRule(g3);
+    generateRule();
     printRule();
     //压进初始元素
     Stack.push("A1");
@@ -66,13 +66,31 @@ bool PDA::inference(QString str,int ptr, QStack<QString> stack, int count)
 {
     bool flag = false;
     QVector<QVector<QString>> deltas;
-    if(!str.length())
+    if(!str.length()){
+        qDebug()<<"Error"<<endl;
+        Result.append("Error\n");
+
         return false;
-    for(auto i:str){
-        if(!this->t_set.contains(i))
-            return false;
     }
-    //如果匹配完成,且栈内没有残留的非终结符,且栈内符号都能变成ε,则可以清空栈
+    for(auto i:str){
+        if(!this->t_set.contains(i)){
+            qDebug()<<"Error"<<endl;
+            Result.append("Error\n");
+
+            return false;
+        }
+    }
+
+    QStack<QString> temp=stack;
+    while(!temp.isEmpty()){
+        Result.append(temp.top());
+        qDebug()<<temp.pop()<<",";
+    }
+    if(!stack.isEmpty())
+    Result.append("->");
+    qDebug()<<endl;
+
+    //如果匹配完成,栈内没有残留的非终结符,且栈内符号都能变成ε,则可以清空栈
    if (ptr == str.length()&&count==0) {
        //因为count=0,所以栈内都是非终结符
        QStack<QString> stk = stack;
@@ -89,6 +107,9 @@ bool PDA::inference(QString str,int ptr, QStack<QString> stack, int count)
                }
            }
            if (!epsilonFlag){
+               qDebug()<<"Error"<<endl;
+               Result.append("Error\n");
+
                return false;
            }
        }
@@ -111,7 +132,10 @@ bool PDA::inference(QString str,int ptr, QStack<QString> stack, int count)
                     stk.push(delta[delta.length() - i - 1]);
                 }
                 if (cnt > str.length() - ptr) {
-                    return false;
+                    qDebug()<<"Error"<<endl;
+                    Result.append("Error\n");
+
+                    return false;  
                 }
                 flag = inference(str, ptr, stk, cnt);
                 if (flag) {
@@ -122,11 +146,14 @@ bool PDA::inference(QString str,int ptr, QStack<QString> stack, int count)
             //判断是否符合输入串
             if (stack.top() == str[ptr]) {
                 QStack<QString> stk=stack;
-                stk.pop();
+                QString toss=stk.pop();
                 ptr++;
                 count--;
                 flag=inference(str,ptr,stk,count);
             } else {
+                qDebug()<<"Error"<<endl;
+                Result.append("Error\n");
+
                 return false;
             }
         }

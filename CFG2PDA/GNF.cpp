@@ -1,5 +1,5 @@
 #include <algorithm>
-#include "GrammerAnalyzer.h"
+#include "Grammar.hpp"
 bool comp(const GNFProduction &a,const GNFProduction &b)
 {
     return a.left<b.left;
@@ -16,14 +16,6 @@ void GNF::showG3Production(){
         qDebug()<<i.left<<"->"<<temp;
     }
 }
-QSet<QString> GNF::returnTset()
-{
-    return t_set;
-}
-QVector<GNFProduction> GNF::returnGNFpro()
-{
-    return gnf_g3;
-}
 bool GNF::f(QString str)
 {    bool flag=true;
     if(str.length()!=1)//去除单一产生式后，长度为1必为终结符
@@ -39,7 +31,6 @@ bool GNF::f(QString str)
     }
      return flag;
 }
-
 void GNF::initialGNF(QVector<QChar> T, QVector<QChar> V, QVector<Production> p)
 {
     for(auto i:T)
@@ -87,7 +78,7 @@ void GNF::initialGNF(QVector<QChar> T, QVector<QChar> V, QVector<Production> p)
                         GNFProduction p;
                         p.left=temp;
                         p.right.push_back(QString(ch));
-                        gnf_pro.push_back(p);
+                        gnf_g1.push_back(p);
                     }
                   gp.right.push_back(t_replace[ch]);
                 }
@@ -96,17 +87,17 @@ void GNF::initialGNF(QVector<QChar> T, QVector<QChar> V, QVector<Production> p)
             }
 
         }
-        gnf_pro.push_back(gp);
+        gnf_g1.push_back(gp);
     }
     showProduction();
-    toG2();
+    generateG2();
     showG2Production();
     generateG3();
     showG3Production();
 }
 void GNF::showProduction()
 {   qDebug()<<"文法G1：";
-    for(auto i:gnf_pro)
+    for(auto i:gnf_g1)
     {
         QString temp;
         for(auto j:i.right)
@@ -211,17 +202,8 @@ int GNF::readNumber(QString s){
     return num.toInt();
 }
 void GNF::generateG2(){
-    sort(gnf_pro.begin(),gnf_pro.end(),comp);
-    QVector< QVector<GNFProduction> > v1(vars_count-1);
-    for(auto i:gnf_pro)
-    {
-        int n=i.left.mid(1).toInt();
-        v1[n-1].push_back(i);
-    }
-}
-void GNF::toG2(){
     QVector<GNFProduction> old;//上一次的产生式
-    gnf_g2=gnf_pro;
+    gnf_g2=gnf_g1;
     //生成所有的Ak->Ak;
     do{
         old=gnf_g2;//每次计算前赋值上一次产生式
