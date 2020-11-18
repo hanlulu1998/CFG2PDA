@@ -80,7 +80,7 @@ QSet<QChar> CFG::nullAbleV(){
     QSet<QChar> new_set;
     for(int i=0;i<products.size();i++)
     {
-        if(products[i].right=="$")
+        if(products[i].right=="#")
             new_set.insert(products[i].left);
     }
     while(old_set!=new_set)
@@ -168,7 +168,7 @@ void CFG::BFSProduction(Production p, QQueue<int> queue,int count)
 void CFG::removeEpoProductions(){
     for(int i=0;i<products.size();i++)
     {
-        if(products[i].right=="$")
+        if(products[i].right=="#")
             continue;
          processProductions(products[i]);
     }

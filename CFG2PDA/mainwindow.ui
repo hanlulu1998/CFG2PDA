@@ -21,7 +21,7 @@
        <number>0</number>
       </property>
       <widget class="QWidget" name="page">
-       <layout class="QGridLayout" name="gridLayout_3">
+       <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0">
          <widget class="QSplitter" name="splitter">
           <property name="orientation">
@@ -35,32 +35,13 @@
             </size>
            </property>
           </widget>
-          <widget class="QScrollArea" name="scrollArea">
-           <property name="widgetResizable">
-            <bool>true</bool>
+          <widget class="QTextBrowser" name="displaytext">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
            </property>
-           <widget class="QWidget" name="scrollAreaWidgetContents">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>0</y>
-              <width>392</width>
-              <height>655</height>
-             </rect>
-            </property>
-            <layout class="QGridLayout" name="gridLayout">
-             <item row="0" column="0">
-              <widget class="QTextBrowser" name="displaytext">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
           </widget>
          </widget>
         </item>
@@ -105,6 +86,7 @@
      <string>判断</string>
     </property>
     <addaction name="actioninput"/>
+    <addaction name="actionFliestring"/>
     <addaction name="actionRunChar"/>
     <addaction name="actionBack"/>
    </widget>
@@ -277,6 +259,11 @@
   <action name="actionCleanFile">
    <property name="text">
     <string>清除文件缓存</string>
+   </property>
+  </action>
+  <action name="actionFliestring">
+   <property name="text">
+    <string>从文件导入</string>
    </property>
   </action>
  </widget>

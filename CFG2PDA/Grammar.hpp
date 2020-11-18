@@ -114,7 +114,7 @@ private:
             friend class MainWindow;
             QVector<QChar> Terminals;//终结符向量
             QVector<QChar> Vars;//非终结符向量
-            QChar epsilon='$';//空串
+            QChar epsilon='#';//空串
             QSet<QChar> T_set;//终结符集合
             QSet<QChar> V_set;//非终结符集合
             QSet<QChar> nullable_V;//可空非终结符集合
