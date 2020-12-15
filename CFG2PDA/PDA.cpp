@@ -1,54 +1,39 @@
 #include"Grammar.hpp"
-void PDA::generateRule()
-{
-   for(auto i:g3)
-   {   QVector<QString>temp;
+//生成PDA规则
+void PDA::generateRule(){
+   for(auto i:G3){
+       QVector<QString>temp;
        QVector<QString>epsilon;
        epsilon.append("#");
-       current_input s(i.right[0],i.left);
+       AutomachineInput s(i.right[0],i.left);
        if(i.right.length()==1)
        {
            temp.clear();
            rule[s].insert(epsilon);
        }
-       else
-        {
+       else{
            i.right.removeFirst();
            temp+=i.right;
            rule[s].insert(temp);
        }
    }
 }
-void PDA::initialPDA(QSet<QString> t_set, QVector<GNFProduction> g3)
+//初始化PDA
+void PDA::initialPDA(QSet<QString> t_set, QVector<GNFProduction> G3)
 {
     this->t_set=t_set;
-    this->g3=g3;
+    this->G3=G3;
     generateRule();
-    printRule();
     //压进初始元素
     Stack.push("A1");
 
 }
-void PDA::printRule(){
-    for(auto i:rule.keys())
-    {  for(auto j:rule[i])
-        {
-            QString temp;
-         for(auto k:j)
-         {
-            temp+=k;
-         }
-         qDebug()<<"(q0,"<<i.input_ch<<","<<i.stack_ch<<")=(q0,"<<temp<<")";
-        }
-    }
-}
-
 QVector<QVector<QString>> PDA::delta(QString input_chr,QString stack_top){
     QVector<QVector<QString>> re;
     QVector<QString> temp;
 
     if(input_chr=="#"){
-        for(auto i:g3){
+        for(auto i:G3){
             if(i.left==stack_top){
                 re.append(i.right);
             }
@@ -60,8 +45,7 @@ QVector<QVector<QString>> PDA::delta(QString input_chr,QString stack_top){
     }
     return re;
 }
-
-
+//迭代推理字符串是否被目标文法接收
 bool PDA::inference(QString str,int ptr, QStack<QString> stack, int count)
 {
     bool flag = false;
@@ -76,7 +60,6 @@ bool PDA::inference(QString str,int ptr, QStack<QString> stack, int count)
         if(!this->t_set.contains(i)){
             qDebug()<<"Error"<<endl;
             Result.append("Error\n");
-
             return false;
         }
     }

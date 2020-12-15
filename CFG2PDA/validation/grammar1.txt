@@ -1,5 +1,0 @@
-S->aSX
-S->bSY
-S->b
-X->b
-Y->a

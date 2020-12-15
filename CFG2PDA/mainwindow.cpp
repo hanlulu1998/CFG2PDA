@@ -77,72 +77,16 @@ MainWindow::MainWindow(QWidget *parent)
         fileString.append("[1] 输入的文法：\n");
         fileString.append(ui->GrammerTextEdit->toPlainText());
         QVector<Production>p;
-//        fileString.append("消除epsilon产生式：\n");
-//        p=cfg.NOepsi_products;
-//            for(auto i :p){
-//                     QString s=QString(i.left)+"->"+i.right+"\n";
-//                     fileString.append(s);
-//            }
-//        fileString.append("消除单一产生式：\n");
-//        p=cfg.NOsingle_products;
-//            for(auto i :p){
-//                     QString s=QString(i.left)+"->"+i.right+"\n";
-//                     fileString.append(s);
-//            }
-//        fileString.append("消除无用产生式：\n");
-//        p=cfg.Use_products;
-//            for(auto i :p){
-//                     QString s=QString(i.left)+"->"+i.right+"\n";
-//                     fileString.append(s);
-//            }
-
             fileString.append("\n[2] CFG化简：\n");
-            p=cfg.Use_products;
+            p=cfg.useProducts;
                 for(auto i :p){
                          QString s=QString(i.left)+"->"+i.right+"\n";
                          fileString.append(s);
                 }
 
           QVector<GNFProduction>q;
-//          fileString.append("转换成G1文法：\n");
-
-//          q=cfg.gnf.getgnf_g1();
-//          for(auto i :q){
-//             QString t="";
-//             for(auto j:i.right){
-//                 t+=j;
-//             }
-//             QString s=QString(i.left)+"->"+t+"\n";
-//             fileString.append(s);
-//         }
-//          fileString.append("转换成G2文法：\n");
-
-//          q=cfg.gnf.getgnf_g2();
-
-//          for(auto i :q){
-//             QString t="";
-//             for(auto j:i.right){
-//                 t+=j;
-//             }
-//             QString s=QString(i.left)+"->"+t+"\n";
-//             fileString.append(s);
-//         }
-//          fileString.append("转换成G3文法：\n");
-
-//          q=cfg.gnf.getgnf_g3();
-
-//          for(auto i :q){
-//             QString t="";
-//             for(auto j:i.right){
-//                 t+=j;
-//             }
-//             QString s=QString(i.left)+"->"+t+"\n";
-//             fileString.append(s);
-//         }
-            fileString.append("\n[3] 转换成GNF：\n");
-
-            q=cfg.gnf.getgnf_g3();
-
+          fileString.append("\n[3] 转换成GNF：\n");
+          q=cfg.gnf.getG3();
             for(auto i :q){
                QString t="";
                for(auto j:i.right){
@@ -151,9 +95,8 @@ MainWindow::MainWindow(QWidget *parent)
                QString s=QString(i.left)+"->"+t+"\n";
                fileString.append(s);
            }
-
           fileString.append("\n[4] PDA转移函数：\n");
-             QMap<current_input,QSet<QVector<QString>>> rule=cfg.pda.getrule();
+             QMap<AutomachineInput,QSet<QVector<QString>>> rule=cfg.pda.getrule();
              for(auto i:rule.keys())
              {  for(auto j:rule[i])
                  {
@@ -162,7 +105,7 @@ MainWindow::MainWindow(QWidget *parent)
                   {
                      temp+=k;
                   }
-                  QString s="(q0,"+i.input_ch+","+i.stack_ch+")=(q0,"+temp+")"+"\n";
+                  QString s="(q0,"+i.inputChar+","+i.stackChar+")=(q0,"+temp+")"+"\n";
                   fileString.append(s);
                  }
              }
@@ -204,15 +147,10 @@ MainWindow::MainWindow(QWidget *parent)
             fileString.append("Reject\n");
             ui->stringTextBrowser->append("Reject\n");
         }
-//        ui->stringTextBrowser->append("推断过程为：");
-//        ui->stringTextBrowser->append(cfg.pda.Result);
-//        fileString.append("推断过程为：\n");
-//        fileString.append(cfg.pda.Result);
         ui->stringTextBrowser->append("=======================");
         }
         ui->actionRunChar->setEnabled(false);
     }   );
-
     connect(ui->actionClean,&QAction::triggered,
             [=](){
         ui->GrammerTextEdit->clear();
@@ -254,7 +192,6 @@ MainWindow::MainWindow(QWidget *parent)
             ui->actionRunChar->setEnabled(true);
     }
             );
-
 }
 MainWindow::~MainWindow()
 {

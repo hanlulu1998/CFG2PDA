@@ -1,8 +1,0 @@
-S->aSA
-S->bB
-A->cA
-A->c
-A->$
-B->bB
-B->cA
-B->$

@@ -1,5 +1,0 @@
-S->ABC
-C->aA
-B->D
-S->a
-A->a
